@@ -140,8 +140,8 @@ def build_graph(tasks: Dict[str, Task]) -> List[GraphNode]:
     return roots
 
 
-def sort_tasks_by_roi(all_tasks: Iterable[Task]):
-    roots = build_graph({task.key: task for task in all_tasks})
+def sort_tasks_by_roi(repo: Iterable[Task]):
+    roots = build_graph({task.key: task for task in repo})
 
     sort_key = lambda node: (-max_sum_roi(node), node.task.key)
     available_nodes = [(sort_key(node), node) for node in roots]

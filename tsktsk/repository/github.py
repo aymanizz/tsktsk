@@ -151,9 +151,9 @@ class GithubRepository:
         if changes:
             self.http.patch(api(f"/repos/{self.repo}/issues/{key}"), json=changes)
 
-    def issues(self, state="all") -> Iterator[JsonObject]:
-        result = self.http.get(api(f"/repos/{self.repo}/issues?state={state}")).json()
+    def issues(self) -> Iterator[JsonObject]:
+        result = self.http.get(api(f"/repos/{self.repo}/issues")).json()
         return (issue for issue in result if not issue.get("pull_request"))
 
     def __iter__(self) -> Iterator[Task]:
-        yield from (task_from_json(issue) for issue in self.issues("open"))
+        yield from (task_from_json(issue) for issue in self.issues())

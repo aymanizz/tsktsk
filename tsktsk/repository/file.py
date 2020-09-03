@@ -83,6 +83,4 @@ class FileRepository:
 
     def __iter__(self) -> Iterator[Task]:
         with self.tasks() as tasks:
-            all_tasks = (task_from_yaml(value) for value in tasks.values())
-
-        return (t for t in all_tasks if not t.done)
+            return (task_from_yaml(value) for value in tasks.values())

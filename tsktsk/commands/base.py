@@ -204,7 +204,7 @@ def edit_dependencies(task: Task, add: Set[str], remove: Set[str]):
 def list() -> None:
     "List tasks to be done, with highest value:effort ratio first."
 
-    sorted_tasks = sort_tasks_by_roi(tasks())
+    sorted_tasks = [task for task in sort_tasks_by_roi(tasks()) if not task.done]
 
     if not sorted_tasks:
         click.echo("No tasks", err=True)
