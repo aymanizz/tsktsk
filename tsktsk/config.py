@@ -10,7 +10,7 @@ class GithubAuth:
 
 
 def split_tuple_list(var: str) -> Iterable[List[str]]:
-    return (s.split(":") for s in os.environ.get(var, "").split(","))
+    return (s.split(":") for s in os.environ.get(var, "").split(",") if s)
 
 
 def dict_from_env(var: str) -> Dict[str, str]:
